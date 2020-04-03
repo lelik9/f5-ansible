@@ -594,6 +594,16 @@ class ModuleParameters(Parameters):
         elif item.get('node', None):
             action['node'] = item['node']
 
+        if 'event' in item.keys():
+            if 'ssl_client_hello' in item['event']:
+                action.update(dict(
+                    sslClientHello=True
+                ))
+            elif 'ssl_server_hello' in item['event']:
+                action.update(dict(
+                    sslServerHello=True
+                ))
+
     def _handle_enable_action(self, action, item):
         """Handle the nuances of the enable type
 
